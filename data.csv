@@ -1,0 +1,151 @@
+code,label
+"char buf[10]; strcpy(buf, input);",1
+"char buf[10]; strncpy(buf, input, 9); buf[9] = '\0';",0
+"int x = INT_MAX; x++;",1
+"int x = INT_MAX - 1; x++;",0
+"char *p = NULL; *p = 5;",1
+"char *p = malloc(10); if (p) *p = 5;",0
+"char buf[8]; gets(buf);",1
+"char buf[8]; fgets(buf, 8, stdin);",0
+"int arr[5]; arr[5] = 10;",1
+"int arr[5]; arr[4] = 10;",0
+"void f(char *s) { char b[16]; strcpy(b, s); }",1
+"void f(char *s) { char b[16]; strncpy(b, s, 15); b[15]='\0'; }",0
+"unsigned int u = 0; u--;",1
+"unsigned int u = 1; u--;",0
+"int *p; *p = 42;",1
+"int *p = malloc(sizeof(int)); *p = 42;",0
+"char buf[4]; sprintf(buf, "%s", longstring);",1
+"char buf[64]; snprintf(buf, 64, "%s", longstring);",0
+"int a = 2147483647; int b = a + 1;",1
+"long long a = 2147483647LL; long long b = a + 1;",0
+"free(ptr); free(ptr);",1
+"free(ptr); ptr = NULL;",0
+"char *p = malloc(10); free(p); p[0] = 'a';",1
+"char *p = malloc(10); p[0] = 'a'; free(p); p = NULL;",0
+"int arr[10]; for(int i=0;i<=10;i++) arr[i]=i;",1
+"int arr[10]; for(int i=0;i<10;i++) arr[i]=i;",0
+"void f() { char s[5]; gets(s); printf("%s",s); }",1
+"void f() { char s[5]; fgets(s,5,stdin); printf("%s",s); }",0
+"int n = atoi(input); char buf[n];",1
+"int n = atoi(input); if(n>0 && n<1024){ char *buf=malloc(n); }",0
+"memcpy(dst, src, strlen(src)+100);",1
+"memcpy(dst, src, sizeof(dst)-1);",0
+"char pwd[8]; scanf("%s", pwd);",1
+"char pwd[8]; scanf("%7s", pwd);",0
+"int *arr = malloc(5*sizeof(int)); arr[5] = 1;",1
+"int *arr = malloc(5*sizeof(int)); arr[4] = 1;",0
+"struct S *p = NULL; p->x = 10;",1
+"struct S *p = malloc(sizeof(struct S)); if(p) p->x = 10;",0
+"char buf[10]; read(fd, buf, 1024);",1
+"char buf[10]; read(fd, buf, sizeof(buf)-1);",0
+"int len = strlen(s); char *p = malloc(len);",1
+"int len = strlen(s); char *p = malloc(len+1);",0
+"unsigned char c = 200; int x = c * 200;",1
+"unsigned int c = 200; unsigned int x = c * 200;",0
+"strcat(dest, src);",1
+"strncat(dest, src, sizeof(dest)-strlen(dest)-1);",0
+"char buf[10]; scanf("%s",buf);",1
+"char buf[10]; scanf("%9s",buf);",0
+"void *p = malloc(0); memset(p,0,10);",1
+"void *p = malloc(10); if(p) memset(p,0,10);",0
+"int arr[3] = {1,2,3}; printf("%d",arr[3]);	",1
+"int arr[3] = {1,2,3}; printf("%d",arr[2]);",0
+"FILE *f = fopen("x","r"); fread(buf,1,100,f);",1
+"FILE *f = fopen("x","r"); if(f) fread(buf,1,100,f);",0
+"int x = -1; unsigned int y = x; if(y < 10) alloc(y);",1
+"size_t y = 10; if(y < 1024) alloc(y);",0
+"void cpy(char *d,char *s){ while(*d++=*s++); }",1
+"void cpy(char *d,char *s,int n){ strncpy(d,s,n); d[n-1]='\0'; }",0
+"char *p = malloc(10); realloc(p,20); p[15]='x';",1
+"char *p = malloc(10); p = realloc(p,20); if(p) p[15]='x';",0
+"int a,b,c; c = a*b;",1
+"int a,b; long long c = (long long)a*b;",0
+"sprintf(msg, fmt);",1
+"snprintf(msg, sizeof(msg), "%s", fmt);",0
+"char arr[5]; memset(arr,0,10);",1
+"char arr[10]; memset(arr,0,10);",0
+"char *tok = strtok(s,","); while(tok){ process(tok); tok=strtok(s,","); }",1
+"char *tok = strtok(s,","); while(tok){ process(tok); tok=strtok(NULL,","); }",0
+"int size=user_input(); int *arr=malloc(size*4);",1
+"int size=user_input(); if(size>0&&size<10000) int *arr=malloc((size_t)size*4);0
+"char cmd[100]; sprintf(cmd,"ls %s",input); system(cmd);	
+"execl("/bin/ls","-l",NULL);",0
+"int *p = (int*)malloc(sizeof(char)); *p = 1000)",1
+"int *p = (int*)malloc(sizeof(int)); *p = 1000;",0
+"void f(int n){ char buf[64]; if(n>0) buf[n]='a'; }",1
+"void f(int n){ char buf[64]; if(n>=0 && n<64) buf[n]='a'; }",0
+"size_t len = strlen(s)-1; char *p = malloc(len);",1
+"size_t len = strlen(s)+1; char *p = malloc(len);",0
+"for(int i=0; i<=sizeof(arr); i++) arr[i]=0;",1
+"for(int i=0; i<sizeof(arr); i++) arr[i]=0;",0
+"char *p; printf("%s",p);",1
+"char *p = ""; printf("%s",p);",0
+"int a=INT_MIN; int b=-a;",1
+"int a=5; int b=-a;",0
+"fgets(buf, sizeof(buf)+1, stdin);",1
+"fgets(buf, sizeof(buf), stdin);",0
+"int *r = realloc(p, newsize); p = r;",1
+"int *r = realloc(p, newsize); if(r) p = r;",0
+"char buf[32]; while(1){ read(fd,buf+i++,1); }",1
+"char buf[32]; for(int i=0;i<31;i++){ read(fd,buf+i,1); }",0
+"void f(char *s){ char t[10]; memcpy(t,s,strlen(s)); }",1
+"void f(char *s){ char t[10]; memcpy(t,s,strnlen(s,9)); t[9]='\0'; }",0
+"uint8_t a=250; uint8_t b=a+10;",1
+"uint16_t a=250; uint16_t b=a+10;",0
+"int idx = get_index(); data[idx] ^= mask;",1
+"int idx = get_index(); if(idx>=0 && idx<LEN) data[idx] ^= mask;",0
+"char s[10]="hello"; s[10]='!';",1
+"char s[11]="hello"; s[10]='!';",0
+"printf(user_input);",1
+"printf("%s", user_input);",0
+"void f(){int a[10]; printf("%d",a[0]);}",1
+"void f(){int a[10]; memset(a,0,sizeof(a)); printf("%d",a[0]);}",0
+"char *buf=alloca(len); strcpy(buf,src);",1
+"char *buf=alloca(len+1); strncpy(buf,src,len); buf[len]='\0';",0
+"int n=recv(sock,buf,sizeof(buf),0); buf[n]='\0';",1
+"int n=recv(sock,buf,sizeof(buf)-1,0); if(n>=0) buf[n]='\0';",0
+"int arr[10]; int i=get_val(); arr[i]++;",1
+"int arr[10]; int i=get_val(); if(i>=0&&i<10) arr[i]++;",0
+"short x = 32767; x++;",1
+"int x = 32767; x++;",0
+"char buf[10]; strncpy(buf,src,10);",1
+"char buf[10]; strncpy(buf,src,9); buf[9]='\0';",0
+"void f(){ int *p=malloc(4); free(p); int a=*p; }",1
+"void f(){ int *p=malloc(4); int a=*p; free(p); p=NULL; }",0
+"strcpy(dst, src1); strcat(dst, src2);",1
+"snprintf(dst, sizeof(dst), "%s%s", src1, src2);",0
+"int arr[5]; int *p=arr+7; *p=1;",1
+"int arr[5]; int *p=arr+4; *p=1;",0
+"int x=user_int(); char b[x];",1
+"int x=user_int(); if(x>0&&x<256){ char *b=malloc(x); if(b) free(b); }",0
+"void f(char *a,char *b){ char tmp[8]; strcpy(tmp,a); strcat(tmp,b); }",1
+"void f(char *a,char *b){ char tmp[64]; snprintf(tmp,64,"%s%s",a,b); }",0
+"memcpy(dst,src,user_len);",1
+"size_t l=user_len(); if(l<=sizeof(dst)) memcpy(dst,src,l);",0
+"char *s=malloc(5); sprintf(s,"hello!");",1
+"char *s=malloc(7); sprintf(s,"hello!");",0
+"int total=a*b+c; if(total>MAX) return;",1
+"long long total=(long long)a*b+c; if(total>MAX||total<0) return;",0
+"struct Node *n=malloc(sizeof(struct Node)); n->next->val=1;",1
+"struct Node *n=malloc(sizeof(struct Node)); n->next=NULL; if(n->next) n->next->val=1;",0
+"write(fd, buf, strlen(buf)+200);",1
+"write(fd, buf, strlen(buf));",0
+"char *p=NULL; int n=strlen(p);",1
+"char *p="hello"; int n=strlen(p);",0
+"int i=-1; arr[i]=5;",1
+"int i=0; arr[i]=5;",0
+"char c=getchar(); arr[c]=1;",1
+"unsigned char c=getchar(); if(c<ARRSIZE) arr[c]=1;",0
+"int res=x+y; if(res<x) overflow();",0
+"int a=10; int b=20; int c=a+b;",0
+"char buf[256]; fgets(buf,256,stdin); buf[strcspn(buf,"\n")]='\0';",0
+"void safecopy(char *d,const char *s,size_t n){ strncpy(d,s,n-1); d[n-1]='\0'; }",0
+"int *arr=calloc(10,sizeof(int)); if(!arr) return; arr[9]=1; free(arr);",0
+"size_t n=strnlen(src,64); char *d=malloc(n+1); memcpy(d,src,n); d[n]='\0';",0
+"int x=5; int y=INT_MAX-5; int z=x+y;",0
+"FILE *f=fopen(path,"r"); if(!f) return -1; fread(buf,1,sizeof(buf)-1,f); fclose(f);",0
+"if(ptr!=NULL){ ptr->field=value; }",0
+"char dst[64]; snprintf(dst,sizeof(dst),"%s",src);",0
+"int *p=malloc(sizeof(int)*10); if(!p) return; memset(p,0,sizeof(int)*10); free(p);",0
+"for(size_t i=0;i<len&&i<sizeof(buf);i++) buf[i]=src[i];",0
